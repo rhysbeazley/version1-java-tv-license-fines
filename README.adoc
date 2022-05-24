@@ -7,6 +7,31 @@
 
 == Belfast Met / Version 1 Academy
 
+=== Client Simulation
+
+==== Problem Statement
+
+"Customer problem: We need a system to allow the general public to pay fines who have not paid their TV licesnses."
+
+What we want to see:
+
+* User Persona and User Research
+* Wireframes / POCs
+* How you manage / track your work
+* What is the MVP?
+* What can you get delivered by the end of the week?
+* Presentation
+
+Hint:
+
+GDS - https://www.gov.uk/service-manual/service-standard
+
+==== Things to Consider
+
+* Understand users and their needs
+* Think about security and protect users's privacy
+* Choose the right tools and technology, think about open standards, common components and patterns
+
 === Java 
 
 We will use the Liberica JDK 11 Java Runtime, https://bell-sw.com/.
