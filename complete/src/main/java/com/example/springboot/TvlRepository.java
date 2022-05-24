@@ -2,7 +2,7 @@ package com.example.springboot;
 
 import java.util.*;
 
-public class TodoRepository {
+public class TvlRepository {
 
     // This is a very simple, in-memory type of database
     // Everytimt the application is re-started the list will be empty
@@ -10,4 +10,3 @@ public class TodoRepository {
     public static ArrayList<ArrayList<String>> datastore = new ArrayList<ArrayList<String>>();
 
 }
-

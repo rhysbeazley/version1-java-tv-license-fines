@@ -1,11 +1,11 @@
 package com.example.springboot;
 
-public class Todo {
+public class TvlUser {
 
     private String title;
     private String description;
 
-    public Todo(String title, String description) {
+    public TvlUser(String title, String description) {
         this.title = title;
         this.description = description;
     }
