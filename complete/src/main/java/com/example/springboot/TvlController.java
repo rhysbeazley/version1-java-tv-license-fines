@@ -20,32 +20,34 @@ public class TvlController {
 		return "index";
 	}
 
-	@GetMapping("/todo")
-	public String todo(Model model, @RequestParam String id) {
+	@PostMapping("/fines")
+	public String fines(Model model, TvlUser user) {
 
-		int todoId = -1;
-		String action = "new?id=null";
-		String actionButton = "New";
-		List<String> datastore = Arrays.asList("", "", "");
-
-		// Check if this is a new todo or an edit of an existing todo
-		if (!id.equals("")) {
-			todoId = Integer.parseInt(id);
-			action = "edit?id=" + todoId;
-			actionButton = "Edit";
-			datastore = TvlRepository.datastore.get(todoId);
-		}
-
-		model.addAttribute("action", action);
-		model.addAttribute("actionButton", actionButton);
-		model.addAttribute("datastore", datastore);
-		return "todo";
+		model.addAttribute("user", user);
+		model.addAttribute("users", TvlRepository.userstore);
+		model.addAttribute("finestore", TvlRepository.finestore);
+		return "fines";
 	}
 
-	@GetMapping("/todos")
+	@GetMapping("/fines")
 	public String todos(Model model) {
-		model.addAttribute("datastore", TvlRepository.datastore);
-		return "todos";
+		model.addAttribute("finestore", TvlRepository.finestore);
+		return "fines";
+	}
+
+	@GetMapping("/fine")
+	public String todo(Model model, @RequestParam String id) {
+
+		int fineId = -1;
+		List<String> fine = Arrays.asList("", "", "", "", "", "", "");
+
+		if (!id.equals("")) {
+			fineId = Integer.parseInt(id);
+			fine = TvlRepository.finestore.get(fineId);
+		}
+
+		model.addAttribute("fine", fine);
+		return "fine";
 	}
 
 	// @RequestParam gets all the values from the form e.g. title = Milk,
@@ -62,11 +64,11 @@ public class TvlController {
 			// System.out.println(paramKey + ": " + paramValue);
 		}
 		// Add the new ArrayList to the existing TodoRepository ArrayList
-		TvlRepository.datastore.add(newTodo);
+		TvlRepository.finestore.add(newTodo);
 
 		// redirect to the GetMapping Todos page so refreshing the page doesn't
 		// re-submit the form
-		return "redirect:todos";
+		return "redirect:fines";
 	}
 
 	@PostMapping("/edit")
@@ -86,11 +88,11 @@ public class TvlController {
 		}
 
 		// Add the new ArrayList to the existing TodoRepository ArrayList
-		TvlRepository.datastore.set(editId, updatedTodo);
+		TvlRepository.finestore.set(editId, updatedTodo);
 
 		// redirect to the GetMapping Todos page so refreshing the page doesn't
 		// re-submit the form
-		return "redirect:todos";
+		return "redirect:fines";
 	}
 
 	@GetMapping("/delete")
@@ -99,10 +101,10 @@ public class TvlController {
 		int todoId = Integer.parseInt(id);
 
 		// Remove the item from the ArrayList based on it's index number
-		TvlRepository.datastore.remove(todoId);
+		TvlRepository.finestore.remove(todoId);
 
-		model.addAttribute("datastore", TvlRepository.datastore);
-		return "todos";
+		model.addAttribute("finestore", TvlRepository.finestore);
+		return "fines";
 	}
 
 }

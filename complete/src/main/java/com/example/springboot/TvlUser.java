@@ -2,28 +2,28 @@ package com.example.springboot;
 
 public class TvlUser {
 
-    private String title;
-    private String description;
+    private String email;
+    private String password;
 
-    public TvlUser(String title, String description) {
-        this.title = title;
-        this.description = description;
+    public TvlUser(String email, String password) {
+        this.email = email;
+        this.password = password;
     }
 
-    public String getTitle() {
-        return title;
+    public String getEmail() {
+        return email;
     }
 
-    public void setTitle(String title) {
-        this.title = title;
+    public void setEmail(String email) {
+        this.email = email;
     }
 
-    public String getDescription() {
-        return description;
+    public String getPassword() {
+        return password;
     }
 
-    public void setDescription(String description) {
-        this.description = description;
+    public void setPasword(String password) {
+        this.password = password;
     }
 
 }
