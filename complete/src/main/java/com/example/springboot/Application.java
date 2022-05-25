@@ -23,13 +23,15 @@ public class Application {
 
 		// Add a fine to the finestore for testing
 		ArrayList<String> newFine = new ArrayList<String>();
-		newFine.add("testuser2@email.com");
+		newFine.add("1"); // Id
+		newFine.add("testuser2@email.com"); // User
 		newFine.add("Chichester Street,  BT1 4JQ"); // Location
 		newFine.add("09/05/2022"); // Contravention date
 		newFine.add("12:39 To 12:47"); // Contravention time
 		newFine.add("01"); // Contravention code
 		newFine.add("FG245"); // Issued by the Civil Enforcement Officer
 		newFine.add("Parked in a restricted street during prescribed hours"); // Parking contravention
+		newFine.add("UNPAID"); // Status
 		TvlRepository.finestore.add(newFine);
 
 	}

@@ -30,41 +30,49 @@ public class TvlController {
 	}
 
 	@GetMapping("/fines")
-	public String todos(Model model) {
+	public String fines(Model model) {
 		model.addAttribute("finestore", TvlRepository.finestore);
 		return "fines";
 	}
 
 	@GetMapping("/fine")
-	public String todo(Model model, @RequestParam String id) {
+	public String fine(Model model, @RequestParam String id) {
 
 		int fineId = -1;
-		List<String> fine = Arrays.asList("", "", "", "", "", "", "");
+		List<String> fine = Arrays.asList("", "", "", "", "", "", "", "", "");
+		// Add a check - Full Amount £130 or £65 if paid within 28 days
 
+		// Find the fine by it's Id number
 		if (!id.equals("")) {
 			fineId = Integer.parseInt(id);
-			fine = TvlRepository.finestore.get(fineId);
+			for (int x = 0; x < TvlRepository.finestore.size(); x++) {
+				List<String> row = TvlRepository.finestore.get(x);
+				for (int y = 0; y < row.size(); y++) {
+					if (fineId == Integer.parseInt(row.get(0))) {
+						fine = TvlRepository.finestore.get(x);
+					}
+				}
+			}
 		}
 
 		model.addAttribute("fine", fine);
 		return "fine";
+
 	}
 
-	// @RequestParam gets all the values from the form e.g. title = Milk,
-	// description = Get the milk
-	@PostMapping("/new")
-	public String newTodo(Model model, @RequestParam Map<String, String> allParams) {
+	@PostMapping("/pay")
+	public String pay(Model model, @RequestParam Map<String, String> allParams) {
 
 		// Loop over the form parameters and add them to a new ArrayList
-		ArrayList<String> newTodo = new ArrayList<String>();
+		ArrayList<String> payment = new ArrayList<String>();
 		for (String key : allParams.keySet()) {
 			String paramKey = key;
 			String paramValue = allParams.get(key);
-			newTodo.add(paramValue);
-			// System.out.println(paramKey + ": " + paramValue);
+			// payment.add(paramValue);
+			System.out.println(paramKey + ": " + paramValue);
 		}
 		// Add the new ArrayList to the existing TodoRepository ArrayList
-		TvlRepository.finestore.add(newTodo);
+		// TvlRepository.finestore.add(newTodo);
 
 		// redirect to the GetMapping Todos page so refreshing the page doesn't
 		// re-submit the form
