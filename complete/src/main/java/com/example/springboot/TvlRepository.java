@@ -13,7 +13,8 @@ public class TvlRepository {
 
     public static ArrayList<ArrayList<String>> getByEmail(String email) {
 
-        // List<String> fine = Arrays.asList("", "", "", "", "", "", "", "", "");
+        // Clear userfines so only runs once per login
+        userfines.clear();
 
         for (int x = 0; x < TvlRepository.finestore.size(); x++) {
             List<String> row = TvlRepository.finestore.get(x);
