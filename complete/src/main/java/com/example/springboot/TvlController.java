@@ -22,40 +22,24 @@ public class TvlController {
 	}
 
 	@PostMapping("/fines")
-	public String fines(Model model, TvlUser user) {
-		model.addAttribute("user", user);
-		model.addAttribute("users", TvlRepository.userstore);
-		model.addAttribute("finestore", TvlRepository.finestore);
+	public String fines(Model model, TvlUser user, @RequestParam String email) {
+		TvlRepository.getByEmail(email);
+		model.addAttribute("userfines", TvlRepository.userfines);
 		return "fines";
 	}
 
 	@GetMapping("/fines")
 	public String fines(Model model) {
-		model.addAttribute("finestore", TvlRepository.finestore);
+		model.addAttribute("userfines", TvlRepository.userfines);
 		return "fines";
 	}
 
 	@GetMapping("/fine")
 	public String fine(Model model, @RequestParam String id) {
 
-		int fineId = -1;
-		List<String> fine = Arrays.asList("", "", "", "", "", "", "", "", "");
 		// Add a check - Full Amount £130 or £65 if paid within 28 days
-
-		// Find the fine by it's Id number
-		if (!id.equals("")) {
-			fineId = Integer.parseInt(id);
-			for (int x = 0; x < TvlRepository.finestore.size(); x++) {
-				List<String> row = TvlRepository.finestore.get(x);
-				for (int y = 0; y < row.size(); y++) {
-					if (fineId == Integer.parseInt(row.get(0))) {
-						fine = TvlRepository.finestore.get(x);
-					}
-				}
-			}
-		}
-
-		model.addAttribute("fine", fine);
+		int fineId = Integer.parseInt(id);
+		model.addAttribute("fine", TvlRepository.getById(fineId));
 		return "fine";
 
 	}
@@ -64,23 +48,9 @@ public class TvlController {
 	public String pay(Model model, @RequestParam String id) {
 
 		// Let's assume every payment is a good payment
-		int fineId = -1;
-		List<String> fine = Arrays.asList("", "", "", "", "", "", "", "", "");
-
-		// Find the fine by it's Id number
-		// Update the status of the fine to PAID
-		if (!id.equals("")) {
-			fineId = Integer.parseInt(id);
-			for (int x = 0; x < TvlRepository.finestore.size(); x++) {
-				List<String> row = TvlRepository.finestore.get(x);
-				for (int y = 0; y < row.size(); y++) {
-					if (fineId == Integer.parseInt(row.get(0))) {
-						fine = TvlRepository.finestore.get(x);
-						fine.set(8, "PAID");
-					}
-				}
-			}
-		}
+		int fineId = Integer.parseInt(id);
+		List<String> fine = TvlRepository.getById(fineId);
+		fine.set(8, "PAID");
 
 		// redirect to GetMapping page to avoid re-submitting form
 		return "redirect:fines";
