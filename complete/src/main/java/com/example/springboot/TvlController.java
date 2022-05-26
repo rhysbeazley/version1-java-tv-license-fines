@@ -1,6 +1,7 @@
 package com.example.springboot;
 
 import java.util.*;
+import java.lang.reflect.Array;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -22,7 +23,6 @@ public class TvlController {
 
 	@PostMapping("/fines")
 	public String fines(Model model, TvlUser user) {
-
 		model.addAttribute("user", user);
 		model.addAttribute("users", TvlRepository.userstore);
 		model.addAttribute("finestore", TvlRepository.finestore);
@@ -61,21 +61,28 @@ public class TvlController {
 	}
 
 	@PostMapping("/pay")
-	public String pay(Model model, @RequestParam Map<String, String> allParams) {
+	public String pay(Model model, @RequestParam String id) {
 
-		// Loop over the form parameters and add them to a new ArrayList
-		ArrayList<String> payment = new ArrayList<String>();
-		for (String key : allParams.keySet()) {
-			String paramKey = key;
-			String paramValue = allParams.get(key);
-			// payment.add(paramValue);
-			System.out.println(paramKey + ": " + paramValue);
+		// Let's assume every payment is a good payment
+		int fineId = -1;
+		List<String> fine = Arrays.asList("", "", "", "", "", "", "", "", "");
+
+		// Find the fine by it's Id number
+		// Update the status of the fine to PAID
+		if (!id.equals("")) {
+			fineId = Integer.parseInt(id);
+			for (int x = 0; x < TvlRepository.finestore.size(); x++) {
+				List<String> row = TvlRepository.finestore.get(x);
+				for (int y = 0; y < row.size(); y++) {
+					if (fineId == Integer.parseInt(row.get(0))) {
+						fine = TvlRepository.finestore.get(x);
+						fine.set(8, "PAID");
+					}
+				}
+			}
 		}
-		// Add the new ArrayList to the existing TodoRepository ArrayList
-		// TvlRepository.finestore.add(newTodo);
 
-		// redirect to the GetMapping Todos page so refreshing the page doesn't
-		// re-submit the form
+		// redirect to GetMapping page to avoid re-submitting form
 		return "redirect:fines";
 	}
 

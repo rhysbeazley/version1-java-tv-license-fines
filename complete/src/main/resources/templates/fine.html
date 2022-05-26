@@ -37,7 +37,7 @@
                     <p><span class="font-weight-bold">Parking contravention: </span><span th:text="' ' + ${fine[7]}"></span></p>
                     <hr />
                     <form th:attr="action='/pay'" method="post">
-                        <input type="hidden" th:value="${fine[0]}" name="fine">
+                        <input type="hidden" th:value="${fine[0]}" name="id">
                         <div class="row">
                             <div class="form-group col-sm-5">
                             <label for="owner">Owner</label>
