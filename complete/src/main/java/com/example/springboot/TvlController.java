@@ -1,7 +1,10 @@
 package com.example.springboot;
 
 import java.util.*;
-import java.lang.reflect.Array;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+import java.util.concurrent.TimeUnit;
 
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -25,21 +28,35 @@ public class TvlController {
 	public String fines(Model model, TvlUser user, @RequestParam String email) {
 		TvlRepository.getByEmail(email);
 		model.addAttribute("userfines", TvlRepository.userfines);
+
 		return "fines";
 	}
 
 	@GetMapping("/fines")
 	public String fines(Model model) {
 		model.addAttribute("userfines", TvlRepository.userfines);
+
 		return "fines";
 	}
 
 	@GetMapping("/fine")
-	public String fine(Model model, @RequestParam String id) {
+	public String fine(Model model, @RequestParam String id) throws ParseException {
 
-		// Add a check - Full Amount £130 or £65 if paid within 28 days
 		int fineId = Integer.parseInt(id);
-		model.addAttribute("fine", TvlRepository.getById(fineId));
+		List<String> fine = TvlRepository.getById(fineId);
+
+		// Get number of days from fine was issued
+		// Fine are generally £130 or £65 if paid within 28 days
+		SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy", Locale.ENGLISH);
+		Date fineDate = sdf.parse(fine.get(3));
+		Date now = new Date();
+		long diff = now.getTime() - fineDate.getTime();
+		TimeUnit time = TimeUnit.DAYS;
+		long fineAge = time.convert(diff, TimeUnit.MILLISECONDS);
+
+		model.addAttribute("fine", fine);
+		model.addAttribute("fineAge", fineAge);
+
 		return "fine";
 
 	}
@@ -52,44 +69,7 @@ public class TvlController {
 		List<String> fine = TvlRepository.getById(fineId);
 		fine.set(8, "PAID");
 
-		// redirect to GetMapping page to avoid re-submitting form
 		return "redirect:fines";
-	}
-
-	@PostMapping("/edit")
-	public String editTodo(Model model, @RequestParam Map<String, String> allParams) {
-
-		int editId = -1;
-
-		// Loop over the form parameters and add them to a new ArrayList
-		ArrayList<String> updatedTodo = new ArrayList<String>();
-		for (String key : allParams.keySet()) {
-			String paramKey = key;
-			String paramValue = allParams.get(key);
-			updatedTodo.add(paramValue);
-			if (key.equals("id")) {
-				editId = Integer.parseInt(paramValue);
-			}
-		}
-
-		// Add the new ArrayList to the existing TodoRepository ArrayList
-		TvlRepository.finestore.set(editId, updatedTodo);
-
-		// redirect to the GetMapping Todos page so refreshing the page doesn't
-		// re-submit the form
-		return "redirect:fines";
-	}
-
-	@GetMapping("/delete")
-	public String deleteTodo(Model model, @RequestParam String id) {
-
-		int todoId = Integer.parseInt(id);
-
-		// Remove the item from the ArrayList based on it's index number
-		TvlRepository.finestore.remove(todoId);
-
-		model.addAttribute("finestore", TvlRepository.finestore);
-		return "fines";
 	}
 
 }

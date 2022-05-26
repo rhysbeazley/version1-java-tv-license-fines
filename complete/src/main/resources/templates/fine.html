@@ -85,7 +85,8 @@
                                 <img th:src="@{../images/cc.png}" width="160" />
                             </div>
                         </div>
-                        <button type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay &#163;130</button>
+                        <button th:if="${fineAge > 28}" type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay &#163;130</button>
+                        <button th:unless="${fineAge > 28}" type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay &#163;65</button>
                     </div>
                 </form> 
             </div>
