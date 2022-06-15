@@ -44,8 +44,20 @@ public class Application {
 		newFine2.add("Parked in a restricted street during prescribed hours"); // Parking contravention
 		newFine2.add("UNPAID"); // Status
 
+		ArrayList<String> newFine3 = new ArrayList<String>();
+		newFine3.add("3"); // Id
+		newFine3.add("anotheruser@email.com"); // User
+		newFine3.add("Chichester Street,  BT1 4JQ"); // Location
+		newFine3.add("12/05/2022"); // Contravention date
+		newFine3.add("16:30 To 17:31"); // Contravention time
+		newFine3.add("01"); // Contravention code
+		newFine3.add("FG245"); // Issued by the Civil Enforcement Officer
+		newFine3.add("Parked in a restricted street during prescribed hours"); // Parking contravention
+		newFine3.add("UNPAID"); // Status
+
 		TvlRepository.finestore.add(newFine1);
 		TvlRepository.finestore.add(newFine2);
+		TvlRepository.finestore.add(newFine3);
 
 	}
 
