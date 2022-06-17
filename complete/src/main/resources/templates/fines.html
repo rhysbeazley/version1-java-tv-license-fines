@@ -35,12 +35,12 @@
               <div th:each="row, iterStat: ${userfines}" class="card">
                   <div class="card-body border border-dark rounded-0 mb-3">
                       <h3 class="mb-3">Penalty Charge Notice</h2>
-                      <p><span class="font-weight-bold">Location: </span><span th:text="' ' + ${row[2]}"></span></p>
-                      <p><span class="font-weight-bold">Contravention date: </span><span th:text="' ' + ${row[3]}"></span></p>
-                      <p><span class="font-weight-bold">Contravention time: </span><span th:text="' ' + ${row[4]}"></span></p>
-                      <p><span class="font-weight-bold">Contravention code: </span><span th:text="' ' + ${row[5]}"></span></p>
-                      <p><span class="font-weight-bold">Issued by the Civil Enforcement Officer: </span><span th:text="' ' + ${row[6]}"></span></p>
-                      <p><span class="font-weight-bold">Parking contravention: </span><span th:text="' ' + ${row[7]}"></span></p>
+                      <p><span class="font-weight-bold">Name: </span><span th:text="' ' + ${row[2]}"></span></p>
+                      <p><span class="font-weight-bold">Penalty Notice Date: </span><span th:text="' ' + ${row[3]}"></span></p>
+                      <p><span class="font-weight-bold">Penalty Notice Reason: </span><span th:text="' ' + ${row[4]}"></span></p>
+                      <p><span class="font-weight-bold">Address: </span><span th:text="' ' + ${row[5]}"></span></p>
+                      <p><span class="font-weight-bold">Amount Owed: </span><span th:text="' ' + ${row[6]}"></span></p>
+                      
                       <a th:if="${row[8] == 'UNPAID'}" th:href="@{/fine(id=${row[0]})}" class="btn btn-danger border border-dark rounded-0">Pay now</a>
                       <div th:unless="${row[8] == 'UNPAID'}" class="alert alert-secondary" role="alert">Thank you, this fine has been paid.</div>
                   </div>
