@@ -25,11 +25,11 @@ public class Application {
 		ArrayList<String> newFine1 = new ArrayList<String>();
 		newFine1.add("1"); // Id
 		newFine1.add("testuser@email.com"); // User
-		newFine1.add("Chichester Street,  BT1 4JQ"); // Location
-		newFine1.add("09/05/2021"); // Contravention date
-		newFine1.add("12:39 To 12:47"); // Contravention time
-		newFine1.add("01"); // Contravention code
-		newFine1.add("FG245"); // Issued by the Civil Enforcement Officer
+		newFine1.add("Test User"); // Name
+		newFine1.add("01/06/2022"); // Date of issue
+		newFine1.add("£250"); // Amount
+		newFine1.add("15/06/2022"); // Due Date
+		newFine1.add(""); // Issued by the Civil Enforcement Officer
 		newFine1.add("Parked in a restricted street during prescribed hours"); // Parking contravention
 		newFine1.add("UNPAID"); // Status
 

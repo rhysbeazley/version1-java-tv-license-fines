@@ -19,7 +19,7 @@
             <div class="collapse navbar-collapse" id="navbarCollapse">
                 <ul class="navbar-nav mr-auto">
                     <li class="nav-item">
-                        <a class="nav-link" href="/fines">Home</a>
+                        <a class="nav-link" href="/fines"></a>
                     </li>
                 </ul>
             </div>
@@ -33,12 +33,10 @@
             <div class="col">
                 <div class="card-body border border-dark rounded-0 mt-3">
                     <h3 class="mb-3">Penalty Charge Notice</h2>
-                    <p><span class="font-weight-bold">Location: </span><span th:text="' ' + ${fine[2]}"></span></p>
-                    <p><span class="font-weight-bold">Contravention date: </span><span th:text="' ' + ${fine[3]}"></span></p>
-                    <p><span class="font-weight-bold">Contravention time: </span><span th:text="' ' + ${fine[4]}"></span></p>
-                    <p><span class="font-weight-bold">Contravention code: </span><span th:text="' ' + ${fine[5]}"></span></p>
-                    <p><span class="font-weight-bold">Issued by the Civil Enforcement Officer: </span><span th:text="' ' + ${fine[6]}"></span></p>
-                    <p><span class="font-weight-bold">Parking contravention: </span><span th:text="' ' + ${fine[7]}"></span></p>
+                    <p><span class="font-weight-bold">Name: </span><span th:text="' ' + ${fine[2]}"></span></p>
+                    <p><span class="font-weight-bold">Fine Issue Date: </span><span th:text="' ' + ${fine[3]}"></span></p>
+                    <p><span class="font-weight-bold">Amount: </span><span th:text="' ' + ${fine[4]}"></span></p>
+                    <p><span class="font-weight-bold">Payment Due By: </span><span th:text="' ' + ${fine[5]}"></span></p>
                     <hr />
                     <form th:attr="action='/pay'" method="post">
                         <input type="hidden" th:value="${fine[0]}" name="id">
@@ -88,9 +86,10 @@
                             <div class="d-flex flex-wrap align-items-center">
                                 <img th:src="@{../images/cc.png}" width="160" />
                             </div>
+                            
                         </div>
-                        <button th:if="${fineAge > 28}" type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay &#163;130</button>
-                        <button th:unless="${fineAge > 28}" type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay &#163;65</button>
+                       
+                        <button th:if="${fineAge > 28}" type="submit" th:href="@{/pay(id=${index})}" class="btn btn-success border border-dark rounded-0">Pay</button>
                             
                     </div>
                 </form> 
