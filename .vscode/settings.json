@@ -1,3 +1,5 @@
 {
-    "java.configuration.updateBuildConfiguration": "interactive"
+    "java.configuration.updateBuildConfiguration": "interactive",
+    "appService.defaultWebAppToDeploy": "/subscriptions/e472ab7a-ea20-4056-b914-a498a630d00f/microsoft.web/sites/subscriptions/e472ab7a-ea20-4056-b914-a498a630d00f/resourceGroups/web-apps/providers/Microsoft.Web/sites/license-system",
+    "appService.deploySubpath": "complete\\target\\spring-boot-complete-0.0.1-SNAPSHOT.jar"
 }
